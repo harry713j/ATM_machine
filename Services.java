@@ -5,7 +5,7 @@ public class Services {
     private static BankDB db;
     Scanner sc ;
     public Services() throws SQLException, ClassNotFoundException {
-        db = new BankDB();
+        db = BankDB.getInstance();
         sc = new Scanner(System.in);
     }
 

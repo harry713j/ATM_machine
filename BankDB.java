@@ -4,11 +4,19 @@ public class BankDB {
     private int atmNo,atmPin;
 
     private Connection con;
+    private static BankDB instance;
 
-    public BankDB() throws ClassNotFoundException, SQLException {
+    private BankDB() throws ClassNotFoundException, SQLException {
         Class.forName("com.mysql.cj.jdbc.Driver");
         con = DriverManager.getConnection("jdbc:mysql://localhost:3306/bank",
                 "root","1317");
+    }
+
+    public static BankDB getInstance() throws SQLException, ClassNotFoundException {
+        if (instance == null){
+            instance = new BankDB();
+        }
+        return instance;
     }
     public boolean authenticate(int atmNo, int atmPin) throws SQLException {
         String query = "select pin from accounts where acc_no = ?";
